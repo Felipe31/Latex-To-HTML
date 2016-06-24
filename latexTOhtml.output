@@ -1,0 +1,1335 @@
+Terminals unused in grammar
+
+   COMENTARIO
+
+
+Grammar
+
+    0 $accept: start $end
+
+    1 start: conf inicio progLatex
+    2      | TITULO RCHV conteudo LCHV
+
+    3 progLatex: corpo fim
+    4          | corpoAninhado fim
+
+    5 conf: classe TITULO RCHV conteudo LCHV
+    6     | classe AUTOR RCHV conteudo LCHV TITULO RCHV conteudo LCHV
+
+    7 classe: CLASSE RCHV NOME LCHV
+
+    8 inicio: begin DOCUMENT LCHV
+
+    9 fim: END RCHV DOCUMENT LCHV
+
+   10 corpoAninhado: capitulo corpo secao corpo subsecao corpo
+   11              | capitulo corpo secao corpo subsecao corpo corpoAninhado
+
+   12 capitulo: CAPITULO RCHV conteudo LCHV
+
+   13 secao: SECAO RCHV conteudo LCHV
+
+   14 subsecao: SUBSECAO RCHV conteudo LCHV
+
+   15 corpo: %empty
+   16      | corpo texto
+   17      | corpo listaNumerada
+   18      | corpo listaItens
+   19      | corpo conteudo
+
+   20 texto: PARAGRAFO RCHV conteudo LCHV
+
+   21 listaNumerada: enumerate itens END RCHV ENUMERATE LCHV
+   22              | enumerate sublistas END RCHV ENUMERATE LCHV
+
+   23 enumerate: begin ENUMERATE LCHV
+
+   24 listaItens: itemize itens END RCHV ITEMIZE LCHV
+   25           | itemize sublistas END RCHV ITEMIZE LCHV
+
+   26 itemize: begin ITEMIZE LCHV
+
+   27 itens: item CONTEUDO LCHV
+   28      | item CONTEUDO LCHV itens
+
+   29 item: ITEM RCHV
+
+   30 sublistas: %empty
+   31          | listaNumerada
+   32          | listaItens
+
+   33 conteudo: CONTEUDO
+   34         | conteudo NEGRITO RCHV conteudo LCHV
+   35         | conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo ITALICO RCHV conteudo LCHV
+
+   37 begin: T_BEGIN RCHV
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+NEGRITO (258) 34
+SUBLINHADO (259) 35
+ITALICO (260) 36
+TITULO (261) 2 5 6
+AUTOR (262) 6
+CLASSE (263) 7
+RCHV (264) 2 5 6 7 9 12 13 14 20 21 22 24 25 29 34 35 36 37
+LCHV (265) 2 5 6 7 8 9 12 13 14 20 21 22 23 24 25 26 27 28 34 35 36
+T_BEGIN (266) 37
+END (267) 9 21 22 24 25
+DOCUMENT (268) 8 9
+SECAO (269) 13
+SUBSECAO (270) 14
+PARAGRAFO (271) 20
+ENUMERATE (272) 21 22 23
+ITEMIZE (273) 24 25 26
+ITEM (274) 29
+CAPITULO (275) 12
+COMENTARIO (276)
+NOME (277) 7
+CONTEUDO (278) 27 28 33
+
+
+Nonterminals, with rules where they appear
+
+$accept (24)
+    on left: 0
+start (25)
+    on left: 1 2, on right: 0
+progLatex (26)
+    on left: 3 4, on right: 1
+conf (27)
+    on left: 5 6, on right: 1
+classe (28)
+    on left: 7, on right: 5 6
+inicio (29)
+    on left: 8, on right: 1
+fim (30)
+    on left: 9, on right: 3 4
+corpoAninhado (31)
+    on left: 10 11, on right: 4 11
+capitulo (32)
+    on left: 12, on right: 10 11
+secao (33)
+    on left: 13, on right: 10 11
+subsecao (34)
+    on left: 14, on right: 10 11
+corpo (35)
+    on left: 15 16 17 18 19, on right: 3 10 11 16 17 18 19
+texto (36)
+    on left: 20, on right: 16
+listaNumerada (37)
+    on left: 21 22, on right: 17 31
+enumerate (38)
+    on left: 23, on right: 21 22
+listaItens (39)
+    on left: 24 25, on right: 18 32
+itemize (40)
+    on left: 26, on right: 24 25
+itens (41)
+    on left: 27 28, on right: 21 24 28
+item (42)
+    on left: 29, on right: 27 28
+sublistas (43)
+    on left: 30 31 32, on right: 22 25
+conteudo (44)
+    on left: 33 34 35 36, on right: 2 5 6 12 13 14 19 20 34 35 36
+begin (45)
+    on left: 37, on right: 8 23 26
+
+
+State 0
+
+    0 $accept: . start $end
+    1 start: . conf inicio progLatex
+    2      | . TITULO RCHV conteudo LCHV
+    5 conf: . classe TITULO RCHV conteudo LCHV
+    6     | . classe AUTOR RCHV conteudo LCHV TITULO RCHV conteudo LCHV
+    7 classe: . CLASSE RCHV NOME LCHV
+
+    TITULO  shift, and go to state 1
+    CLASSE  shift, and go to state 2
+
+    start   go to state 3
+    conf    go to state 4
+    classe  go to state 5
+
+
+State 1
+
+    2 start: TITULO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 6
+
+
+State 2
+
+    7 classe: CLASSE . RCHV NOME LCHV
+
+    RCHV  shift, and go to state 7
+
+
+State 3
+
+    0 $accept: start . $end
+
+    $end  shift, and go to state 8
+
+
+State 4
+
+    1 start: conf . inicio progLatex
+    8 inicio: . begin DOCUMENT LCHV
+   37 begin: . T_BEGIN RCHV
+
+    T_BEGIN  shift, and go to state 9
+
+    inicio  go to state 10
+    begin   go to state 11
+
+
+State 5
+
+    5 conf: classe . TITULO RCHV conteudo LCHV
+    6     | classe . AUTOR RCHV conteudo LCHV TITULO RCHV conteudo LCHV
+
+    TITULO  shift, and go to state 12
+    AUTOR   shift, and go to state 13
+
+
+State 6
+
+    2 start: TITULO RCHV . conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 15
+
+
+State 7
+
+    7 classe: CLASSE RCHV . NOME LCHV
+
+    NOME  shift, and go to state 16
+
+
+State 8
+
+    0 $accept: start $end .
+
+    $default  accept
+
+
+State 9
+
+   37 begin: T_BEGIN . RCHV
+
+    RCHV  shift, and go to state 17
+
+
+State 10
+
+    1 start: conf inicio . progLatex
+    3 progLatex: . corpo fim
+    4          | . corpoAninhado fim
+   10 corpoAninhado: . capitulo corpo secao corpo subsecao corpo
+   11              | . capitulo corpo secao corpo subsecao corpo corpoAninhado
+   12 capitulo: . CAPITULO RCHV conteudo LCHV
+   15 corpo: . %empty  [T_BEGIN, END, PARAGRAFO, CONTEUDO]
+   16      | . corpo texto
+   17      | . corpo listaNumerada
+   18      | . corpo listaItens
+   19      | . corpo conteudo
+
+    CAPITULO  shift, and go to state 18
+
+    $default  reduce using rule 15 (corpo)
+
+    progLatex      go to state 19
+    corpoAninhado  go to state 20
+    capitulo       go to state 21
+    corpo          go to state 22
+
+
+State 11
+
+    8 inicio: begin . DOCUMENT LCHV
+
+    DOCUMENT  shift, and go to state 23
+
+
+State 12
+
+    5 conf: classe TITULO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 24
+
+
+State 13
+
+    6 conf: classe AUTOR . RCHV conteudo LCHV TITULO RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 25
+
+
+State 14
+
+   33 conteudo: CONTEUDO .
+
+    $default  reduce using rule 33 (conteudo)
+
+
+State 15
+
+    2 start: TITULO RCHV conteudo . LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 29
+
+
+State 16
+
+    7 classe: CLASSE RCHV NOME . LCHV
+
+    LCHV  shift, and go to state 30
+
+
+State 17
+
+   37 begin: T_BEGIN RCHV .
+
+    $default  reduce using rule 37 (begin)
+
+
+State 18
+
+   12 capitulo: CAPITULO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 31
+
+
+State 19
+
+    1 start: conf inicio progLatex .
+
+    $default  reduce using rule 1 (start)
+
+
+State 20
+
+    4 progLatex: corpoAninhado . fim
+    9 fim: . END RCHV DOCUMENT LCHV
+
+    END  shift, and go to state 32
+
+    fim  go to state 33
+
+
+State 21
+
+   10 corpoAninhado: capitulo . corpo secao corpo subsecao corpo
+   11              | capitulo . corpo secao corpo subsecao corpo corpoAninhado
+   15 corpo: . %empty
+   16      | . corpo texto
+   17      | . corpo listaNumerada
+   18      | . corpo listaItens
+   19      | . corpo conteudo
+
+    $default  reduce using rule 15 (corpo)
+
+    corpo  go to state 34
+
+
+State 22
+
+    3 progLatex: corpo . fim
+    9 fim: . END RCHV DOCUMENT LCHV
+   16 corpo: corpo . texto
+   17      | corpo . listaNumerada
+   18      | corpo . listaItens
+   19      | corpo . conteudo
+   20 texto: . PARAGRAFO RCHV conteudo LCHV
+   21 listaNumerada: . enumerate itens END RCHV ENUMERATE LCHV
+   22              | . enumerate sublistas END RCHV ENUMERATE LCHV
+   23 enumerate: . begin ENUMERATE LCHV
+   24 listaItens: . itemize itens END RCHV ITEMIZE LCHV
+   25           | . itemize sublistas END RCHV ITEMIZE LCHV
+   26 itemize: . begin ITEMIZE LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+   37 begin: . T_BEGIN RCHV
+
+    T_BEGIN    shift, and go to state 9
+    END        shift, and go to state 32
+    PARAGRAFO  shift, and go to state 35
+    CONTEUDO   shift, and go to state 14
+
+    fim            go to state 36
+    texto          go to state 37
+    listaNumerada  go to state 38
+    enumerate      go to state 39
+    listaItens     go to state 40
+    itemize        go to state 41
+    conteudo       go to state 42
+    begin          go to state 43
+
+
+State 23
+
+    8 inicio: begin DOCUMENT . LCHV
+
+    LCHV  shift, and go to state 44
+
+
+State 24
+
+    5 conf: classe TITULO RCHV . conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 45
+
+
+State 25
+
+    6 conf: classe AUTOR RCHV . conteudo LCHV TITULO RCHV conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 46
+
+
+State 26
+
+   34 conteudo: conteudo NEGRITO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 47
+
+
+State 27
+
+   35 conteudo: conteudo SUBLINHADO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 48
+
+
+State 28
+
+   36 conteudo: conteudo ITALICO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 49
+
+
+State 29
+
+    2 start: TITULO RCHV conteudo LCHV .
+
+    $default  reduce using rule 2 (start)
+
+
+State 30
+
+    7 classe: CLASSE RCHV NOME LCHV .
+
+    $default  reduce using rule 7 (classe)
+
+
+State 31
+
+   12 capitulo: CAPITULO RCHV . conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 50
+
+
+State 32
+
+    9 fim: END . RCHV DOCUMENT LCHV
+
+    RCHV  shift, and go to state 51
+
+
+State 33
+
+    4 progLatex: corpoAninhado fim .
+
+    $default  reduce using rule 4 (progLatex)
+
+
+State 34
+
+   10 corpoAninhado: capitulo corpo . secao corpo subsecao corpo
+   11              | capitulo corpo . secao corpo subsecao corpo corpoAninhado
+   13 secao: . SECAO RCHV conteudo LCHV
+   16 corpo: corpo . texto
+   17      | corpo . listaNumerada
+   18      | corpo . listaItens
+   19      | corpo . conteudo
+   20 texto: . PARAGRAFO RCHV conteudo LCHV
+   21 listaNumerada: . enumerate itens END RCHV ENUMERATE LCHV
+   22              | . enumerate sublistas END RCHV ENUMERATE LCHV
+   23 enumerate: . begin ENUMERATE LCHV
+   24 listaItens: . itemize itens END RCHV ITEMIZE LCHV
+   25           | . itemize sublistas END RCHV ITEMIZE LCHV
+   26 itemize: . begin ITEMIZE LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+   37 begin: . T_BEGIN RCHV
+
+    T_BEGIN    shift, and go to state 9
+    SECAO      shift, and go to state 52
+    PARAGRAFO  shift, and go to state 35
+    CONTEUDO   shift, and go to state 14
+
+    secao          go to state 53
+    texto          go to state 37
+    listaNumerada  go to state 38
+    enumerate      go to state 39
+    listaItens     go to state 40
+    itemize        go to state 41
+    conteudo       go to state 42
+    begin          go to state 43
+
+
+State 35
+
+   20 texto: PARAGRAFO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 54
+
+
+State 36
+
+    3 progLatex: corpo fim .
+
+    $default  reduce using rule 3 (progLatex)
+
+
+State 37
+
+   16 corpo: corpo texto .
+
+    $default  reduce using rule 16 (corpo)
+
+
+State 38
+
+   17 corpo: corpo listaNumerada .
+
+    $default  reduce using rule 17 (corpo)
+
+
+State 39
+
+   21 listaNumerada: . enumerate itens END RCHV ENUMERATE LCHV
+   21              | enumerate . itens END RCHV ENUMERATE LCHV
+   22              | . enumerate sublistas END RCHV ENUMERATE LCHV
+   22              | enumerate . sublistas END RCHV ENUMERATE LCHV
+   23 enumerate: . begin ENUMERATE LCHV
+   24 listaItens: . itemize itens END RCHV ITEMIZE LCHV
+   25           | . itemize sublistas END RCHV ITEMIZE LCHV
+   26 itemize: . begin ITEMIZE LCHV
+   27 itens: . item CONTEUDO LCHV
+   28      | . item CONTEUDO LCHV itens
+   29 item: . ITEM RCHV
+   30 sublistas: . %empty  [END]
+   31          | . listaNumerada
+   32          | . listaItens
+   37 begin: . T_BEGIN RCHV
+
+    T_BEGIN  shift, and go to state 9
+    ITEM     shift, and go to state 55
+
+    $default  reduce using rule 30 (sublistas)
+
+    listaNumerada  go to state 56
+    enumerate      go to state 39
+    listaItens     go to state 57
+    itemize        go to state 41
+    itens          go to state 58
+    item           go to state 59
+    sublistas      go to state 60
+    begin          go to state 43
+
+
+State 40
+
+   18 corpo: corpo listaItens .
+
+    $default  reduce using rule 18 (corpo)
+
+
+State 41
+
+   21 listaNumerada: . enumerate itens END RCHV ENUMERATE LCHV
+   22              | . enumerate sublistas END RCHV ENUMERATE LCHV
+   23 enumerate: . begin ENUMERATE LCHV
+   24 listaItens: . itemize itens END RCHV ITEMIZE LCHV
+   24           | itemize . itens END RCHV ITEMIZE LCHV
+   25           | . itemize sublistas END RCHV ITEMIZE LCHV
+   25           | itemize . sublistas END RCHV ITEMIZE LCHV
+   26 itemize: . begin ITEMIZE LCHV
+   27 itens: . item CONTEUDO LCHV
+   28      | . item CONTEUDO LCHV itens
+   29 item: . ITEM RCHV
+   30 sublistas: . %empty  [END]
+   31          | . listaNumerada
+   32          | . listaItens
+   37 begin: . T_BEGIN RCHV
+
+    T_BEGIN  shift, and go to state 9
+    ITEM     shift, and go to state 55
+
+    $default  reduce using rule 30 (sublistas)
+
+    listaNumerada  go to state 56
+    enumerate      go to state 39
+    listaItens     go to state 57
+    itemize        go to state 41
+    itens          go to state 61
+    item           go to state 59
+    sublistas      go to state 62
+    begin          go to state 43
+
+
+State 42
+
+   19 corpo: corpo conteudo .  [T_BEGIN, END, SECAO, SUBSECAO, PARAGRAFO, CAPITULO, CONTEUDO]
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+
+    $default  reduce using rule 19 (corpo)
+
+
+State 43
+
+   23 enumerate: begin . ENUMERATE LCHV
+   26 itemize: begin . ITEMIZE LCHV
+
+    ENUMERATE  shift, and go to state 63
+    ITEMIZE    shift, and go to state 64
+
+
+State 44
+
+    8 inicio: begin DOCUMENT LCHV .
+
+    $default  reduce using rule 8 (inicio)
+
+
+State 45
+
+    5 conf: classe TITULO RCHV conteudo . LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 65
+
+
+State 46
+
+    6 conf: classe AUTOR RCHV conteudo . LCHV TITULO RCHV conteudo LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 66
+
+
+State 47
+
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   34         | conteudo NEGRITO RCHV . conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 67
+
+
+State 48
+
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   35         | conteudo SUBLINHADO RCHV . conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 68
+
+
+State 49
+
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+   36         | conteudo ITALICO RCHV . conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 69
+
+
+State 50
+
+   12 capitulo: CAPITULO RCHV conteudo . LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 70
+
+
+State 51
+
+    9 fim: END RCHV . DOCUMENT LCHV
+
+    DOCUMENT  shift, and go to state 71
+
+
+State 52
+
+   13 secao: SECAO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 72
+
+
+State 53
+
+   10 corpoAninhado: capitulo corpo secao . corpo subsecao corpo
+   11              | capitulo corpo secao . corpo subsecao corpo corpoAninhado
+   15 corpo: . %empty
+   16      | . corpo texto
+   17      | . corpo listaNumerada
+   18      | . corpo listaItens
+   19      | . corpo conteudo
+
+    $default  reduce using rule 15 (corpo)
+
+    corpo  go to state 73
+
+
+State 54
+
+   20 texto: PARAGRAFO RCHV . conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 74
+
+
+State 55
+
+   29 item: ITEM . RCHV
+
+    RCHV  shift, and go to state 75
+
+
+State 56
+
+   31 sublistas: listaNumerada .
+
+    $default  reduce using rule 31 (sublistas)
+
+
+State 57
+
+   32 sublistas: listaItens .
+
+    $default  reduce using rule 32 (sublistas)
+
+
+State 58
+
+   21 listaNumerada: enumerate itens . END RCHV ENUMERATE LCHV
+
+    END  shift, and go to state 76
+
+
+State 59
+
+   27 itens: item . CONTEUDO LCHV
+   28      | item . CONTEUDO LCHV itens
+
+    CONTEUDO  shift, and go to state 77
+
+
+State 60
+
+   22 listaNumerada: enumerate sublistas . END RCHV ENUMERATE LCHV
+
+    END  shift, and go to state 78
+
+
+State 61
+
+   24 listaItens: itemize itens . END RCHV ITEMIZE LCHV
+
+    END  shift, and go to state 79
+
+
+State 62
+
+   25 listaItens: itemize sublistas . END RCHV ITEMIZE LCHV
+
+    END  shift, and go to state 80
+
+
+State 63
+
+   23 enumerate: begin ENUMERATE . LCHV
+
+    LCHV  shift, and go to state 81
+
+
+State 64
+
+   26 itemize: begin ITEMIZE . LCHV
+
+    LCHV  shift, and go to state 82
+
+
+State 65
+
+    5 conf: classe TITULO RCHV conteudo LCHV .
+
+    $default  reduce using rule 5 (conf)
+
+
+State 66
+
+    6 conf: classe AUTOR RCHV conteudo LCHV . TITULO RCHV conteudo LCHV
+
+    TITULO  shift, and go to state 83
+
+
+State 67
+
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   34         | conteudo NEGRITO RCHV conteudo . LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 84
+
+
+State 68
+
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   35         | conteudo SUBLINHADO RCHV conteudo . LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 85
+
+
+State 69
+
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+   36         | conteudo ITALICO RCHV conteudo . LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 86
+
+
+State 70
+
+   12 capitulo: CAPITULO RCHV conteudo LCHV .
+
+    $default  reduce using rule 12 (capitulo)
+
+
+State 71
+
+    9 fim: END RCHV DOCUMENT . LCHV
+
+    LCHV  shift, and go to state 87
+
+
+State 72
+
+   13 secao: SECAO RCHV . conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 88
+
+
+State 73
+
+   10 corpoAninhado: capitulo corpo secao corpo . subsecao corpo
+   11              | capitulo corpo secao corpo . subsecao corpo corpoAninhado
+   14 subsecao: . SUBSECAO RCHV conteudo LCHV
+   16 corpo: corpo . texto
+   17      | corpo . listaNumerada
+   18      | corpo . listaItens
+   19      | corpo . conteudo
+   20 texto: . PARAGRAFO RCHV conteudo LCHV
+   21 listaNumerada: . enumerate itens END RCHV ENUMERATE LCHV
+   22              | . enumerate sublistas END RCHV ENUMERATE LCHV
+   23 enumerate: . begin ENUMERATE LCHV
+   24 listaItens: . itemize itens END RCHV ITEMIZE LCHV
+   25           | . itemize sublistas END RCHV ITEMIZE LCHV
+   26 itemize: . begin ITEMIZE LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+   37 begin: . T_BEGIN RCHV
+
+    T_BEGIN    shift, and go to state 9
+    SUBSECAO   shift, and go to state 89
+    PARAGRAFO  shift, and go to state 35
+    CONTEUDO   shift, and go to state 14
+
+    subsecao       go to state 90
+    texto          go to state 37
+    listaNumerada  go to state 38
+    enumerate      go to state 39
+    listaItens     go to state 40
+    itemize        go to state 41
+    conteudo       go to state 42
+    begin          go to state 43
+
+
+State 74
+
+   20 texto: PARAGRAFO RCHV conteudo . LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 91
+
+
+State 75
+
+   29 item: ITEM RCHV .
+
+    $default  reduce using rule 29 (item)
+
+
+State 76
+
+   21 listaNumerada: enumerate itens END . RCHV ENUMERATE LCHV
+
+    RCHV  shift, and go to state 92
+
+
+State 77
+
+   27 itens: item CONTEUDO . LCHV
+   28      | item CONTEUDO . LCHV itens
+
+    LCHV  shift, and go to state 93
+
+
+State 78
+
+   22 listaNumerada: enumerate sublistas END . RCHV ENUMERATE LCHV
+
+    RCHV  shift, and go to state 94
+
+
+State 79
+
+   24 listaItens: itemize itens END . RCHV ITEMIZE LCHV
+
+    RCHV  shift, and go to state 95
+
+
+State 80
+
+   25 listaItens: itemize sublistas END . RCHV ITEMIZE LCHV
+
+    RCHV  shift, and go to state 96
+
+
+State 81
+
+   23 enumerate: begin ENUMERATE LCHV .
+
+    $default  reduce using rule 23 (enumerate)
+
+
+State 82
+
+   26 itemize: begin ITEMIZE LCHV .
+
+    $default  reduce using rule 26 (itemize)
+
+
+State 83
+
+    6 conf: classe AUTOR RCHV conteudo LCHV TITULO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 97
+
+
+State 84
+
+   34 conteudo: conteudo NEGRITO RCHV conteudo LCHV .
+
+    $default  reduce using rule 34 (conteudo)
+
+
+State 85
+
+   35 conteudo: conteudo SUBLINHADO RCHV conteudo LCHV .
+
+    $default  reduce using rule 35 (conteudo)
+
+
+State 86
+
+   36 conteudo: conteudo ITALICO RCHV conteudo LCHV .
+
+    $default  reduce using rule 36 (conteudo)
+
+
+State 87
+
+    9 fim: END RCHV DOCUMENT LCHV .
+
+    $default  reduce using rule 9 (fim)
+
+
+State 88
+
+   13 secao: SECAO RCHV conteudo . LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 98
+
+
+State 89
+
+   14 subsecao: SUBSECAO . RCHV conteudo LCHV
+
+    RCHV  shift, and go to state 99
+
+
+State 90
+
+   10 corpoAninhado: capitulo corpo secao corpo subsecao . corpo
+   11              | capitulo corpo secao corpo subsecao . corpo corpoAninhado
+   15 corpo: . %empty
+   16      | . corpo texto
+   17      | . corpo listaNumerada
+   18      | . corpo listaItens
+   19      | . corpo conteudo
+
+    $default  reduce using rule 15 (corpo)
+
+    corpo  go to state 100
+
+
+State 91
+
+   20 texto: PARAGRAFO RCHV conteudo LCHV .
+
+    $default  reduce using rule 20 (texto)
+
+
+State 92
+
+   21 listaNumerada: enumerate itens END RCHV . ENUMERATE LCHV
+
+    ENUMERATE  shift, and go to state 101
+
+
+State 93
+
+   27 itens: . item CONTEUDO LCHV
+   27      | item CONTEUDO LCHV .  [END]
+   28      | . item CONTEUDO LCHV itens
+   28      | item CONTEUDO LCHV . itens
+   29 item: . ITEM RCHV
+
+    ITEM  shift, and go to state 55
+
+    $default  reduce using rule 27 (itens)
+
+    itens  go to state 102
+    item   go to state 59
+
+
+State 94
+
+   22 listaNumerada: enumerate sublistas END RCHV . ENUMERATE LCHV
+
+    ENUMERATE  shift, and go to state 103
+
+
+State 95
+
+   24 listaItens: itemize itens END RCHV . ITEMIZE LCHV
+
+    ITEMIZE  shift, and go to state 104
+
+
+State 96
+
+   25 listaItens: itemize sublistas END RCHV . ITEMIZE LCHV
+
+    ITEMIZE  shift, and go to state 105
+
+
+State 97
+
+    6 conf: classe AUTOR RCHV conteudo LCHV TITULO RCHV . conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 106
+
+
+State 98
+
+   13 secao: SECAO RCHV conteudo LCHV .
+
+    $default  reduce using rule 13 (secao)
+
+
+State 99
+
+   14 subsecao: SUBSECAO RCHV . conteudo LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+
+    CONTEUDO  shift, and go to state 14
+
+    conteudo  go to state 107
+
+
+State 100
+
+   10 corpoAninhado: . capitulo corpo secao corpo subsecao corpo
+   10              | capitulo corpo secao corpo subsecao corpo .  [END]
+   11              | . capitulo corpo secao corpo subsecao corpo corpoAninhado
+   11              | capitulo corpo secao corpo subsecao corpo . corpoAninhado
+   12 capitulo: . CAPITULO RCHV conteudo LCHV
+   16 corpo: corpo . texto
+   17      | corpo . listaNumerada
+   18      | corpo . listaItens
+   19      | corpo . conteudo
+   20 texto: . PARAGRAFO RCHV conteudo LCHV
+   21 listaNumerada: . enumerate itens END RCHV ENUMERATE LCHV
+   22              | . enumerate sublistas END RCHV ENUMERATE LCHV
+   23 enumerate: . begin ENUMERATE LCHV
+   24 listaItens: . itemize itens END RCHV ITEMIZE LCHV
+   25           | . itemize sublistas END RCHV ITEMIZE LCHV
+   26 itemize: . begin ITEMIZE LCHV
+   33 conteudo: . CONTEUDO
+   34         | . conteudo NEGRITO RCHV conteudo LCHV
+   35         | . conteudo SUBLINHADO RCHV conteudo LCHV
+   36         | . conteudo ITALICO RCHV conteudo LCHV
+   37 begin: . T_BEGIN RCHV
+
+    T_BEGIN    shift, and go to state 9
+    PARAGRAFO  shift, and go to state 35
+    CAPITULO   shift, and go to state 18
+    CONTEUDO   shift, and go to state 14
+
+    $default  reduce using rule 10 (corpoAninhado)
+
+    corpoAninhado  go to state 108
+    capitulo       go to state 21
+    texto          go to state 37
+    listaNumerada  go to state 38
+    enumerate      go to state 39
+    listaItens     go to state 40
+    itemize        go to state 41
+    conteudo       go to state 42
+    begin          go to state 43
+
+
+State 101
+
+   21 listaNumerada: enumerate itens END RCHV ENUMERATE . LCHV
+
+    LCHV  shift, and go to state 109
+
+
+State 102
+
+   28 itens: item CONTEUDO LCHV itens .
+
+    $default  reduce using rule 28 (itens)
+
+
+State 103
+
+   22 listaNumerada: enumerate sublistas END RCHV ENUMERATE . LCHV
+
+    LCHV  shift, and go to state 110
+
+
+State 104
+
+   24 listaItens: itemize itens END RCHV ITEMIZE . LCHV
+
+    LCHV  shift, and go to state 111
+
+
+State 105
+
+   25 listaItens: itemize sublistas END RCHV ITEMIZE . LCHV
+
+    LCHV  shift, and go to state 112
+
+
+State 106
+
+    6 conf: classe AUTOR RCHV conteudo LCHV TITULO RCHV conteudo . LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 113
+
+
+State 107
+
+   14 subsecao: SUBSECAO RCHV conteudo . LCHV
+   34 conteudo: conteudo . NEGRITO RCHV conteudo LCHV
+   35         | conteudo . SUBLINHADO RCHV conteudo LCHV
+   36         | conteudo . ITALICO RCHV conteudo LCHV
+
+    NEGRITO     shift, and go to state 26
+    SUBLINHADO  shift, and go to state 27
+    ITALICO     shift, and go to state 28
+    LCHV        shift, and go to state 114
+
+
+State 108
+
+   11 corpoAninhado: capitulo corpo secao corpo subsecao corpo corpoAninhado .
+
+    $default  reduce using rule 11 (corpoAninhado)
+
+
+State 109
+
+   21 listaNumerada: enumerate itens END RCHV ENUMERATE LCHV .
+
+    $default  reduce using rule 21 (listaNumerada)
+
+
+State 110
+
+   22 listaNumerada: enumerate sublistas END RCHV ENUMERATE LCHV .
+
+    $default  reduce using rule 22 (listaNumerada)
+
+
+State 111
+
+   24 listaItens: itemize itens END RCHV ITEMIZE LCHV .
+
+    $default  reduce using rule 24 (listaItens)
+
+
+State 112
+
+   25 listaItens: itemize sublistas END RCHV ITEMIZE LCHV .
+
+    $default  reduce using rule 25 (listaItens)
+
+
+State 113
+
+    6 conf: classe AUTOR RCHV conteudo LCHV TITULO RCHV conteudo LCHV .
+
+    $default  reduce using rule 6 (conf)
+
+
+State 114
+
+   14 subsecao: SUBSECAO RCHV conteudo LCHV .
+
+    $default  reduce using rule 14 (subsecao)

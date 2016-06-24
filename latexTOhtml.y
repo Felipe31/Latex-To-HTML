@@ -1,8 +1,6 @@
 %{
 #include <stdio.h>
 #include "latexTOhtml.h"
-void yyerror (const char *);
-int c = 0;
 %}
 
 %union{
@@ -37,7 +35,7 @@ int c = 0;
 
 start:
       conf inicio progLatex
-      |TITULO RCHV conteudo LCHV                            {title();}
+      | TITULO RCHV conteudo LCHV                      {title();}
     ;
 progLatex:
       corpo fim
@@ -56,7 +54,7 @@ inicio:
 fim:
       END RCHV DOCUMENT LCHV
     ;
-corpoAninhado:
+corpoAninhado: capitulo corpo secao corpo subsecao corpo
     | capitulo corpo secao corpo subsecao corpo corpoAninhado
     ;
 capitulo:
@@ -69,10 +67,10 @@ subsecao:
       SUBSECAO RCHV conteudo LCHV
     ;
 corpo:
-    | texto corpo
-    | listaNumerada corpo
-    | listaItens corpo
-    | conteudo corpo
+    | corpo texto
+    | corpo listaNumerada
+    | corpo listaItens
+    | corpo conteudo
     ;
 texto:
       PARAGRAFO RCHV conteudo LCHV
@@ -103,10 +101,10 @@ sublistas:
     | listaItens
     ;
 conteudo:
-    | CONTEUDO conteudo                                     {c++; printf("%d cont\n", c);list_insert(in_listG, $1);}
-    | NEGRITO RCHV conteudo LCHV conteudo                   {c++; printf("%d cont\n", c);black();}
-    | SUBLINHADO RCHV conteudo LCHV conteudo                {underline();}
-    | ITALICO RCHV conteudo LCHV conteudo                   {italic();}
+      CONTEUDO                                              {list_insert(in_listG, $1);}
+    | conteudo NEGRITO RCHV conteudo LCHV                   {black();}
+    | conteudo SUBLINHADO RCHV conteudo LCHV                {underline();}
+    | conteudo ITALICO RCHV conteudo LCHV                   {italic();}
     ;
 begin:
       T_BEGIN RCHV

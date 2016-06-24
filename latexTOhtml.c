@@ -3,6 +3,12 @@
 #include <string.h>
 #include "latexTOhtml.h"
 
+int yyerror(char *s)
+{
+  printf("Error");
+  exit(1);
+}
+
 void title()
 {
     char * title = capture_from(in_listG);
@@ -44,7 +50,7 @@ void italic()
 **************************************************************************************************
 *************************************************************************************************/
 
-void yyerror(char *s, ...){}
+//void yyerror(const char *s, ...){}
 
 char * pTOp(char * text)
 {
