@@ -1,27 +1,27 @@
 \documentclass{article}
-\title{\underline{Um teste alou bem !?legal } eeeee}
+\title{\underline{Teste Latex to } HTML}
 \begin{document}
 
-    \chapter{Este eh um capitulo}
+    \chapter{Capitulo}
 
-    \textbf{Negrito}
-    \textbf{Um teste alou bem legal }\textit{"Palavra de origem inglesa"}
+    \textbf{palavra em negrito}
+    \textbf{Palavra em negrito 2}\textit{"Palavra Palavra em italico"}
 
-    \section{Esta eh uma 'secao'}
-    Inicio e agora: \textit{Aqui vai um pedaco em italico!} mas afinal, isso vem da Italia?
-    o/
+    \section{Seção}
+    Início: \textit{Aqui vai um pedaco em italico!} final?
+    (:
 
-    \subsection{Esta eh uma subsecao}
-        \paragraph{Vamos escrever (um texto) bastante interessante usando} \textit{paragraph}!asd
+    \subsection{Subsecao}
+        \paragraph{Vamos escrever (um texto) bastante interessante usando} \textit{paragraph}!
 
                 \begin{enumerate}
-                    \item{Primeiro Item Enumerado}
-                    \item{Segundo Item Enumerado}
+                    \item{Item enumerado}
+                    \item{Item Enumerado}
                 \end{enumerate}
 
         \begin{itemize}
-            \item{Primeiro Item}
-            \item{Segundo Item}
+            \item{Item}
+            \item{Item}
         \end{itemize}
 
 \end{document}
