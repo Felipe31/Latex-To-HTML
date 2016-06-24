@@ -34,7 +34,7 @@
 # define YY_YY_LATEXTOHTML_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 1
+# define YYDEBUG 0
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -64,7 +64,7 @@ extern int yydebug;
     ITEM = 274,
     CAPITULO = 275,
     COMENTARIO = 276,
-    NOME = 277,
+    ARTICLE = 277,
     CONTEUDO = 278
   };
 #endif
@@ -74,7 +74,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 6 "latexTOhtml.y" /* yacc.c:1909  */
+#line 9 "latexTOhtml.y" /* yacc.c:1909  */
 
     char *string;
 

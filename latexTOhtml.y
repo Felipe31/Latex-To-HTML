@@ -1,6 +1,9 @@
 %{
 #include <stdio.h>
 #include "latexTOhtml.h"
+// extern int yydebug;
+// #define YYDEBUG 1
+// yydebug = 1;
 %}
 
 %union{
@@ -26,27 +29,26 @@
 %token ITEM
 %token CAPITULO
 %token <string> COMENTARIO
-%token <string> NOME
+%token <string> ARTICLE
 %token <string> CONTEUDO
 
-%start start
+%start starte
 
 %%
 
-start:
+starte:
       conf inicio progLatex
-      | TITULO RCHV conteudo LCHV                      {title();}
     ;
 progLatex:
       corpo fim
     | corpoAninhado fim
     ;
 conf:
-      classe TITULO RCHV conteudo LCHV                      {title();}
-    | classe AUTOR RCHV conteudo LCHV TITULO RCHV conteudo LCHV
+      classe TITULO RCHV tag LCHV                      {title();}
+    | classe AUTOR RCHV tag LCHV TITULO RCHV tag LCHV
     ;
 classe:
-      CLASSE RCHV NOME LCHV
+      CLASSE RCHV ARTICLE LCHV
     ;
 inicio:
       begin DOCUMENT LCHV
@@ -58,22 +60,22 @@ corpoAninhado: capitulo corpo secao corpo subsecao corpo
     | capitulo corpo secao corpo subsecao corpo corpoAninhado
     ;
 capitulo:
-      CAPITULO RCHV conteudo LCHV
+      CAPITULO RCHV tag LCHV
     ;
 secao:
-      SECAO RCHV conteudo LCHV
+      SECAO RCHV tag LCHV
     ;
 subsecao:
-      SUBSECAO RCHV conteudo LCHV
+      SUBSECAO RCHV tag LCHV
     ;
 corpo:
     | corpo texto
     | corpo listaNumerada
     | corpo listaItens
-    | corpo conteudo
+    | corpo tag                                         {print_file();}
     ;
 texto:
-      PARAGRAFO RCHV conteudo LCHV
+      PARAGRAFO RCHV tag LCHV
     ;
 listaNumerada:
       enumerate itens END RCHV ENUMERATE LCHV
@@ -100,11 +102,15 @@ sublistas:
     | listaNumerada
     | listaItens
     ;
+tag:
+    | tag conteudo
+    | tag NEGRITO RCHV tag LCHV                    {bold();}
+    | tag SUBLINHADO RCHV tag LCHV                 {underline();}
+    | tag ITALICO RCHV tag LCHV                    {italic();}
+    ;
+
 conteudo:
-      CONTEUDO                                              {list_insert(in_listG, $1);}
-    | conteudo NEGRITO RCHV conteudo LCHV                   {black();}
-    | conteudo SUBLINHADO RCHV conteudo LCHV                {underline();}
-    | conteudo ITALICO RCHV conteudo LCHV                   {italic();}
+      CONTEUDO                                              {conteudo($1);}
     ;
 begin:
       T_BEGIN RCHV

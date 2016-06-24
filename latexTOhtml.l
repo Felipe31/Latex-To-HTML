@@ -5,8 +5,8 @@
 #include "latexTOhtml.tab.h"
 %}
 
-
 ENUMERATE   "enumerate"
+ARTICLE     "article"
 ITEM        "item"
 ITEMIZE     "itemize"
 DOCUMENT    "document"
@@ -27,26 +27,27 @@ LCHV        "}"
 letra       [a-z]
 letraM 	    [A-Z]
 digito 	    [0-9]
-CONTEUDO    ("---asd"|"---qwerty")
-NOME        ({letra}|{letraM})({letra}|{letraM}|{digito})*
 COMENTARIO  "%"(.)*\n
-ESPACO      [ \t\n]
+ESPACO      " "
+SIMBOLOS    ("!"|"?"|"."|","|"("|")")
+CONTEUDO    ({letra}|{letraM}|{digito}|{ESPACO}|{SIMBOLOS})*
 
 %%
-
+[\t\n]
 {DOCUMENT}      { puts("DOCUMENT"); return DOCUMENT; }
 {ENUMERATE}     { puts("ENUMERATE"); return ENUMERATE; }
 {ITEMIZE}       { puts("ITEMIZE"); return ITEMIZE; }
 {ITEM}          { puts("ITEM"); return ITEM; }
-{NEGRITO}       { puts("NEGRITO"); return NEGRITO;}
-{SUBLINHADO}    { puts("SUBLINHADO"); return SUBLINHADO;}
-{ITALICO}       { puts("ITALICO"); return ITALICO;}
+{NEGRITO}       { puts("NEGRITO"); taG = 1; return NEGRITO;}
+{SUBLINHADO}    { puts("SUBLINHADO"); taG = 2; return SUBLINHADO;}
+{ITALICO}       { puts("ITALICO"); taG = 3; return ITALICO;}
 {TITULO}        { puts("TITULO"); return TITULO;}
 {AUTOR}         { puts("AUTOR"); return AUTOR;}
 {CLASSE}        { puts("CLASSE"); return CLASSE;}
+{ARTICLE}       { puts("ARTICLE"); return ARTICLE;}
 {COMENTARIO}    { puts("COMENTARIO"); yylval.string = pTOp(yytext); return COMENTARIO;}
-{NOME}          { puts("NOME"); yylval.string = pTOp(yytext); return NOME;}
 {CONTEUDO}      { puts("CONTEUDO"); yylval.string = pTOp(yytext); return CONTEUDO;}
+{ESPACO}        { puts("ESPACO???????????????????????"); yylval.string = pTOp(" "); return CONTEUDO;}
 {LCHV}          { puts("LCHV"); return LCHV; }
 {RCHV}          { puts("RCHV"); return RCHV; }
 {T_BEGIN}       { puts("T_BEGIN"); return T_BEGIN; }

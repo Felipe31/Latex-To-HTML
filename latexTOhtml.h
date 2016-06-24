@@ -5,7 +5,7 @@ extern int yylineno;
 extern FILE* yyin;
 extern int yyparse(void);
 int yylex();
-int yyerror ( char *s);
+int yyerror ( const char *s);
 
 
 typedef struct list{
@@ -27,17 +27,25 @@ typedef struct head_list
 *************************************************************************************************/
 FILE * arqG;
 head_list * in_listG;
-
+head_list * title_listG;
+int flag_printG, Nsub, Nneg, Nit;
+int taG;
+/*
+NEGRITO = 1
+SUBLINHADO = 2
+ITALICO = 3
+*/
 /*************************************************************************************************
 **************************************************************************************************
-*************************************** FUNCOES ****************************************
+******************************************** FUNCOES *********************************************
 **************************************************************************************************
 *************************************************************************************************/
 
 void title();
-void black();
+void bold();
 void underline();
 void italic();
+void conteudo(char * cont);
 
 
 /*************************************************************************************************
@@ -46,9 +54,12 @@ void italic();
 **************************************************************************************************
 *************************************************************************************************/
 
+void print_file();
+int include_tag(char * open, char * close);
 char * pTOp(char * text);
 // char * capture_data();
 char * capture_from(head_list * lista);
+char * capture_n_last(head_list * lista, int n);
 head_list * list_new();
 list * list_insert(head_list* fila, char * v_list);
 char * list_remove(head_list* fila);
