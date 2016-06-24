@@ -1,1 +1,15 @@
-\documentclass{article}\title{\underline{Um teste alou bem !?legal } eeeee}\begin{document}\underline{Sobreescrito} \textbf{Negrito} \textbf{Um teste alou bem legal } teste qualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante \end{document}
+\documentclass{article}
+\title{\underline{Um teste alou bem !?legal } eeeee}
+\begin{document}\underline{Sobreescrito}
+
+\textbf{Negrito}
+\textbf{Um teste alou bem legal }
+teste q
+
+s
+f
+ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante
+ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante
+ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante
+ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante 
+\end{document}

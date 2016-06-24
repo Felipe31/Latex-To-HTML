@@ -27,10 +27,10 @@ LCHV        "}"
 letra       [a-z]
 letraM 	    [A-Z]
 digito 	    [0-9]
+espaco      (" "|"\n")
+simbolos    ("!"|"?"|"."|","|"("|")")
 COMENTARIO  "%"(.)*\n
-ESPACO      " "
-SIMBOLOS    ("!"|"?"|"."|","|"("|")")
-CONTEUDO    ({letra}|{letraM}|{digito}|{ESPACO}|{SIMBOLOS})*
+CONTEUDO    ({letra}|{letraM}|{digito}|{simbolos})({letra}|{letraM}|{digito}|{simbolos}|{espaco})*
 
 %%
 [\t\n]
@@ -47,7 +47,6 @@ CONTEUDO    ({letra}|{letraM}|{digito}|{ESPACO}|{SIMBOLOS})*
 {ARTICLE}       { puts("ARTICLE"); return ARTICLE;}
 {COMENTARIO}    { puts("COMENTARIO"); yylval.string = pTOp(yytext); return COMENTARIO;}
 {CONTEUDO}      { puts("CONTEUDO"); yylval.string = pTOp(yytext); return CONTEUDO;}
-{ESPACO}        { puts("ESPACO???????????????????????"); yylval.string = pTOp(" "); return CONTEUDO;}
 {LCHV}          { puts("LCHV"); return LCHV; }
 {RCHV}          { puts("RCHV"); return RCHV; }
 {T_BEGIN}       { puts("T_BEGIN"); return T_BEGIN; }

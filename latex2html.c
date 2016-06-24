@@ -82,12 +82,11 @@ void print_file()
 char * pTOp(char * text)
 {
     int i = strlen(text);
-    char * new = (char *) malloc(sizeof(char)*i);
+    char * new = (char *) calloc(i, sizeof(char));
     for(; i > 0; i--)
     {
         new[i-1] = text[i-1];
     }
-
     return new;
 }
 
@@ -242,7 +241,7 @@ int main(int argc, char const *argv[])
     Nneg = 0;
     Nit = 0;
     taG = 0;
-    
+
     yyin = fopen("teste.in", "r");
     if (!yyin) return -1;
 
