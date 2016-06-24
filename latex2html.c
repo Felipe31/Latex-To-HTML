@@ -32,40 +32,39 @@ void title()
     fprintf(arqG, "<center><h1>%s</h1></center>\n", head);
     flag_printG = 0;
 }
-void bold()
-{
-    include_tag("<b>", "</b>");
-    if(!flag_printG) print_file();
-}
 
-void underline()
+void numerate()
 {
-    include_tag("<u>", "</u>");
-    if(!flag_printG) print_file();
+    taG = 8;
+    Nnumerate++;
+    include_tag("<ol>", "</ol>");
+    Nnumerate = 0;
 }
-
-void italic()
+void itemize()
 {
-    include_tag("<i>", "</i>");
-    if(!flag_printG) print_file();
+    taG = 8;
+    Nnumerate++;
+    include_tag("<ul>", "</ul>");
+    Nnumerate = 0;
 }
 
 void conteudo(char * cont)
 {
     switch (taG) {
-        case 1:
-            Nneg++;
-        break;
-        case 2:
-            Nsub++;
-        break;
-        case 3:
-            Nit++;
-        break;
+        case 1:     Nneg++; break;
+        case 2:     Nunder++; break;
+        case 3:     Nit++; break;
+        case 4:     Nparagraph++; break;
+        case 5:     Nchapter++; break;
+        case 6:     Nsection++; break;
+        case 7:     Nsubsection++; break;
+        case 10:    Nitem++; break;
 
     }
     list_insert(in_listG, cont);
 }
+
+
 /*************************************************************************************************
 **************************************************************************************************
 ************************************* ALGORITMOS AUXILIARES **************************************
@@ -93,25 +92,22 @@ char * pTOp(char * text)
 int include_tag(char * open, char * close)
 {
     char * aux;
-
-    // if (flag_printG == -1) // title nao executado
-    // {
-        // aux = capture_from(in_listG);
-        // if(!aux) return -1;
-        // list_insert(title_listG, aux);
-    // }
     int N = 1;
 
     switch (taG) {
-        case 1:
-            N = Nneg; break;
-        case 2:
-            N = Nsub; break;
-        case 3:
-            N = Nit; break;
+        case 1:     N = Nneg; break;
+        case 2:     N = Nunder; break;
+        case 3:     N = Nit; break;
+        case 4:     N = Nparagraph; break;
+        case 5:     N = Nchapter; break;
+        case 6:     N = Nsection; break;
+        case 7:     N = Nsubsection; break;
+        case 8:     N = Nnumerate; break;
+        case 9:     N = Nitemize; break;
+        case 10:    N = Nitem; Nnumerate++;break;
     }
 
-    Nneg = Nsub = Nit = taG = 0;
+    taG = Nunder = Nneg = Nit = Nparagraph = Nchapter = Nsection = Nsubsection = Nitem = 0;
 
     char * in = capture_n_last(in_listG, N);
     if(!in) return -1;
@@ -139,6 +135,7 @@ char * capture_from(head_list * lista)
 }
 char * capture_n_last(head_list * lista, int n)
 {
+    if(!lista || n < 1) return NULL;
     int i;
     char * v[n];
     char * temp, * data = (char *) calloc(10000, sizeof(char));
@@ -237,10 +234,7 @@ int main(int argc, char const *argv[])
     in_listG = list_new();
     title_listG = list_new();
     flag_printG = -1; // indica que <title> nao foi executado
-    Nsub = 0;
-    Nneg = 0;
-    Nit = 0;
-    taG = 0;
+    taG = Nunder = Nneg = Nit = Nparagraph = Nchapter = Nsection = Nsubsection = Nnumerate = Nitemize = Nitem = 0;
 
     yyin = fopen("teste.in", "r");
     if (!yyin) return -1;

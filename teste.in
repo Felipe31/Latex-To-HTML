@@ -1,15 +1,27 @@
 \documentclass{article}
 \title{\underline{Um teste alou bem !?legal } eeeee}
-\begin{document}\underline{Sobreescrito}
+\begin{document}
 
-\textbf{Negrito}
-\textbf{Um teste alou bem legal }
-teste q
+    \chapter{Este eh um capitulo}
 
-s
-f
-ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante
-ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante
-ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante
-ualquer \textit{Eu e minhanega linda demais} vamos escrever um texto bastante interessante 
+    \textbf{Negrito}
+    \textbf{Um teste alou bem legal }\textit{"Palavra de origem inglesa"}
+
+    \section{Esta eh uma 'secao'}
+    Inicio e agora: \textit{Aqui vai um pedaco em italico!} mas afinal, isso vem da Italia?
+    o/
+
+    \subsection{Esta eh uma subsecao}
+        \paragraph{Vamos escrever (um texto) bastante interessante usando} \textit{paragraph}!asd
+
+                \begin{enumerate}
+                    \item{Primeiro Item Enumerado}
+                    \item{Segundo Item Enumerado}
+                \end{enumerate}
+
+        \begin{itemize}
+            \item{Primeiro Item}
+            \item{Segundo Item}
+        \end{itemize}
+
 \end{document}

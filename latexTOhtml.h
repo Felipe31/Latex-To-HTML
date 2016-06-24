@@ -28,7 +28,8 @@ typedef struct head_list
 FILE * arqG;
 head_list * in_listG;
 head_list * title_listG;
-int flag_printG, Nsub, Nneg, Nit;
+char * aux;
+int flag_printG, Nunder, Nneg, Nit, Nparagraph, Nchapter, Nsection, Nsubsection, Nnumerate, Nitemize, Nitem;
 int taG;
 /*
 NEGRITO = 1
@@ -42,10 +43,28 @@ ITALICO = 3
 *************************************************************************************************/
 
 void title();
-void bold();
-void underline();
-void italic();
 void conteudo(char * cont);
+void numerate();
+void itemize();
+
+
+
+#define bold() \
+        include_tag("<b>", "</b>")
+#define underline() \
+        include_tag("<u>", "</u>")
+#define italic() \
+        include_tag("<i>", "</i>")
+#define paragraph() \
+        include_tag("<p>", "</p>")
+#define chapter() \
+        include_tag("<h2>", "</h2>")
+#define section() \
+        include_tag("<h3>", "</h3>")
+#define subsection() \
+        include_tag("<h4>", "</h4>")
+#define item() \
+        include_tag("<li>", "</li>")
 
 
 /*************************************************************************************************

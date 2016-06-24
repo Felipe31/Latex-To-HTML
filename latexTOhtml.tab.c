@@ -1307,38 +1307,104 @@ yyreduce:
 #line 1308 "latexTOhtml.tab.c" /* yacc.c:1646  */
     break;
 
+  case 12:
+#line 63 "latexTOhtml.y" /* yacc.c:1646  */
+    {chapter();}
+#line 1314 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 13:
+#line 66 "latexTOhtml.y" /* yacc.c:1646  */
+    {section();}
+#line 1320 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 14:
+#line 69 "latexTOhtml.y" /* yacc.c:1646  */
+    {subsection();}
+#line 1326 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 16:
+#line 72 "latexTOhtml.y" /* yacc.c:1646  */
+    {print_file();}
+#line 1332 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 17:
+#line 73 "latexTOhtml.y" /* yacc.c:1646  */
+    {print_file();}
+#line 1338 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 18:
+#line 74 "latexTOhtml.y" /* yacc.c:1646  */
+    {print_file();}
+#line 1344 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
   case 19:
 #line 75 "latexTOhtml.y" /* yacc.c:1646  */
     {print_file();}
-#line 1314 "latexTOhtml.tab.c" /* yacc.c:1646  */
+#line 1350 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 20:
+#line 78 "latexTOhtml.y" /* yacc.c:1646  */
+    {paragraph();}
+#line 1356 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 21:
+#line 81 "latexTOhtml.y" /* yacc.c:1646  */
+    {numerate();}
+#line 1362 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 24:
+#line 88 "latexTOhtml.y" /* yacc.c:1646  */
+    {itemize();}
+#line 1368 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 27:
+#line 95 "latexTOhtml.y" /* yacc.c:1646  */
+    {conteudo((yyvsp[-1].string)); item();}
+#line 1374 "latexTOhtml.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 28:
+#line 96 "latexTOhtml.y" /* yacc.c:1646  */
+    {conteudo((yyvsp[-2].string)); item();}
+#line 1380 "latexTOhtml.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
 #line 107 "latexTOhtml.y" /* yacc.c:1646  */
     {bold();}
-#line 1320 "latexTOhtml.tab.c" /* yacc.c:1646  */
+#line 1386 "latexTOhtml.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 108 "latexTOhtml.y" /* yacc.c:1646  */
     {underline();}
-#line 1326 "latexTOhtml.tab.c" /* yacc.c:1646  */
+#line 1392 "latexTOhtml.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
 #line 109 "latexTOhtml.y" /* yacc.c:1646  */
     {italic();}
-#line 1332 "latexTOhtml.tab.c" /* yacc.c:1646  */
+#line 1398 "latexTOhtml.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
 #line 113 "latexTOhtml.y" /* yacc.c:1646  */
     {conteudo((yyvsp[0].string));}
-#line 1338 "latexTOhtml.tab.c" /* yacc.c:1646  */
+#line 1404 "latexTOhtml.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1342 "latexTOhtml.tab.c" /* yacc.c:1646  */
+#line 1408 "latexTOhtml.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
